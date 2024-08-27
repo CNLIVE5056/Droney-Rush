@@ -40,16 +40,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                         lives.setImage(assets.image`myImage5`)
                     }
                     info.startCountdown(10)
-                } else {
-                    blaster.setImage(assets.image`Wing`)
-                    animation.runImageAnimation(
-                    Droney,
-                    assets.animation`myAnim`,
-                    100,
-                    true
-                    )
-                    wingg = 0
-                    info.stopCountdown()
                 }
             } else {
                 if (randint(1, 6) == 1) {
@@ -77,19 +67,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 info.onCountdownEnd(function () {
-    if (wingg == 0) {
-        wingg = 1
-        info.changeLifeBy(1)
-    } else {
-        blaster.setImage(assets.image`Wing`)
-        animation.runImageAnimation(
-        Droney,
-        assets.animation`myAnim`,
-        100,
-        true
-        )
-        wingg = 0
-    }
+    blaster.setImage(assets.image`Wing`)
+    animation.runImageAnimation(
+    Droney,
+    assets.animation`myAnim`,
+    100,
+    true
+    )
+    wingg = 0
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     acheck = 0
@@ -98,51 +83,49 @@ controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
     if (!(life <= 0)) {
         if (start == 1) {
             if (acheck == 0) {
-                sprite = (sprite + 1) % 4
-                if (sprite == 0) {
-                    animation.stopAnimation(animation.AnimationTypes.All, blaster)
-                    Droney.setImage(assets.image`Droney`)
-                    animation.runImageAnimation(
-                    Droney,
-                    assets.animation`myAnim0`,
-                    100,
-                    true
-                    )
-                    blaster.setImage(assets.image`Blaster`)
-                } else if (sprite == 1) {
-                    Droney.setImage(assets.image`Dexen`)
-                    animation.runImageAnimation(
-                    Droney,
-                    assets.animation`myAnim1`,
-                    100,
-                    true
-                    )
-                    blaster.setImage(assets.image`Arm`)
-                } else if (sprite == 2) {
-                    Droney.setImage(assets.image`Mitron`)
-                    animation.runImageAnimation(
-                    Droney,
-                    assets.animation`myAnim`,
-                    100,
-                    true
-                    )
-                    blaster.setImage(assets.image`Wing`)
-                } else {
-                    Droney.setImage(assets.image`Sebex`)
-                    animation.stopAnimation(animation.AnimationTypes.All, Droney)
-                    blaster.setImage(assets.image`myImage3`)
-                    animation.runImageAnimation(
-                    blaster,
-                    assets.animation`myAnim3`,
-                    50,
-                    true
-                    )
-                    if (info.countdown() > 6) {
-                        wingg = 0
+                if (wingg == 0) {
+                    sprite = (sprite + 1) % 4
+                    if (sprite == 0) {
+                        animation.stopAnimation(animation.AnimationTypes.All, blaster)
+                        Droney.setImage(assets.image`Droney`)
+                        animation.runImageAnimation(
+                        Droney,
+                        assets.animation`myAnim0`,
+                        100,
+                        true
+                        )
+                        blaster.setImage(assets.image`Blaster`)
+                    } else if (sprite == 1) {
+                        Droney.setImage(assets.image`Dexen`)
+                        animation.runImageAnimation(
+                        Droney,
+                        assets.animation`myAnim1`,
+                        100,
+                        true
+                        )
+                        blaster.setImage(assets.image`Arm`)
+                    } else if (sprite == 2) {
+                        Droney.setImage(assets.image`Mitron`)
+                        animation.runImageAnimation(
+                        Droney,
+                        assets.animation`myAnim`,
+                        100,
+                        true
+                        )
+                        blaster.setImage(assets.image`Wing`)
+                    } else {
+                        Droney.setImage(assets.image`Sebex`)
+                        animation.stopAnimation(animation.AnimationTypes.All, Droney)
+                        blaster.setImage(assets.image`myImage3`)
+                        animation.runImageAnimation(
+                        blaster,
+                        assets.animation`myAnim3`,
+                        50,
+                        true
+                        )
                     }
-                    info.changeCountdownBy(0 - info.countdown())
+                    acheck = 1
                 }
-                acheck = 1
             }
         }
     }
@@ -164,6 +147,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         }
         pause(500)
     } else {
+        info.changeScoreBy(1)
         sprites.destroy(otherSprite, effects.disintegrate, 200)
     }
 })
