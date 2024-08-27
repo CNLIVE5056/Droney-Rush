@@ -16,8 +16,7 @@
         "images.g.jres",
         "images.g.ts",
         "tilemap.g.jres",
-        "tilemap.g.ts",
-        "main.py"
+        "tilemap.g.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -29,7 +28,7 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "tsprj",
+    "preferredEditor": "blocksprj",
     "palette": [
         "#000000",
         "#FFFFFF",
