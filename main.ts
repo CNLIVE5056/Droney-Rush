@@ -167,6 +167,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         sprites.destroy(otherSprite, effects.disintegrate, 200)
     }
 })
+let Enemy2: Sprite = null
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
 let Rocket: Sprite = null
@@ -246,4 +247,12 @@ forever(function () {
         life += -1
     }
     game.setGameOverScoringType(game.ScoringType.HighScore)
+})
+forever(function () {
+    if (start == 1) {
+        pause(5000)
+        Enemy2 = sprites.create(assets.image`myImage17`, SpriteKind.Enemy)
+        Enemy2.setPosition(160, randint(0, 120))
+        Enemy2.setVelocity(-200, 0)
+    }
 })
