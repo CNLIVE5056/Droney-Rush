@@ -7,78 +7,44 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(life <= 0)) {
         if (start == 1) {
             if (sprite == 0) {
-                Rocket = sprites.createProjectileFromSprite(, Droney, 100, 0)
+                Rocket = sprites.createProjectileFromSprite(assets.image`myImage0`, Droney, 100, 0)
             } else if (sprite == 1) {
                 if (life <= 2.8) {
                     story.spriteSayText(Droney, "Healing...Life:" + convertToText(Math.round((life + 0.2) * 10) / 10))
                     life += 0.2
                     life = Math.round(life * 10) / 10
                     if (life < 2) {
-                        lives.setImage()
+                        lives.setImage(assets.image`myImage2`)
                     } else if (life < 3) {
-                        lives.setImage()
+                        lives.setImage(assets.image`myImage4`)
                     } else {
-                        lives.setImage()
+                        lives.setImage(assets.image`myImage5`)
                     }
                 }
             } else if (sprite == 2) {
                 if (wingg == 0) {
-                    blaster.setImage()
+                    blaster.setImage(assets.image`Wing0`)
                     wingg = 1
                     animation.runImageAnimation(
                     Droney,
-                    [img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `],
+                    assets.animation`myAnim6`,
                     60,
                     true
                     )
                     life += -1
                     if (life < 2) {
-                        lives.setImage()
+                        lives.setImage(assets.image`myImage2`)
                     } else if (life < 3) {
-                        lives.setImage()
+                        lives.setImage(assets.image`myImage4`)
                     } else {
-                        lives.setImage()
+                        lives.setImage(assets.image`myImage5`)
                     }
                     info.startCountdown(10)
                 } else {
-                    blaster.setImage()
+                    blaster.setImage(assets.image`Wing`)
                     animation.runImageAnimation(
                     Droney,
-                    [img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `],
+                    assets.animation`myAnim`,
                     100,
                     true
                     )
@@ -88,27 +54,10 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             } else {
                 if (randint(1, 6) == 1) {
                     for (let index = 0; index < 3; index++) {
-                        Rocket = sprites.createProjectileFromSprite(, Droney, randint(0, 33), randint(-33, 33))
+                        Rocket = sprites.createProjectileFromSprite(assets.image`myImage0`, Droney, randint(0, 33), randint(-33, 33))
                         animation.runImageAnimation(
                         Rocket,
-                        [img`
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            . . . . . . . . . . . . . . . . 
-                            `],
+                        assets.animation`myAnim5`,
                         50,
                         true
                         )
@@ -132,27 +81,10 @@ info.onCountdownEnd(function () {
         wingg = 1
         info.changeLifeBy(1)
     } else {
-        blaster.setImage()
+        blaster.setImage(assets.image`Wing`)
         animation.runImageAnimation(
         Droney,
-        [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `],
+        assets.animation`myAnim`,
         100,
         true
         )
@@ -169,114 +101,46 @@ controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
                 sprite = (sprite + 1) % 4
                 if (sprite == 0) {
                     animation.stopAnimation(animation.AnimationTypes.All, blaster)
-                    Droney.setImage()
+                    Droney.setImage(assets.image`Droney`)
                     animation.runImageAnimation(
                     Droney,
-                    [img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `],
+                    assets.animation`myAnim0`,
                     100,
                     true
                     )
-                    blaster.setImage()
+                    blaster.setImage(assets.image`Blaster`)
                 } else if (sprite == 1) {
-                    Droney.setImage()
+                    Droney.setImage(assets.image`Dexen`)
                     animation.runImageAnimation(
                     Droney,
-                    [img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `],
+                    assets.animation`myAnim1`,
                     100,
                     true
                     )
-                    blaster.setImage()
+                    blaster.setImage(assets.image`Arm`)
                 } else if (sprite == 2) {
-                    Droney.setImage()
+                    Droney.setImage(assets.image`Mitron`)
                     animation.runImageAnimation(
                     Droney,
-                    [img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `],
+                    assets.animation`myAnim`,
                     100,
                     true
                     )
-                    blaster.setImage()
+                    blaster.setImage(assets.image`Wing`)
                 } else {
-                    Droney.setImage()
+                    Droney.setImage(assets.image`Sebex`)
                     animation.stopAnimation(animation.AnimationTypes.All, Droney)
-                    blaster.setImage()
+                    blaster.setImage(assets.image`myImage3`)
                     animation.runImageAnimation(
                     blaster,
-                    [img`
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        . . . . . . . . . . . . . . . . 
-                        `],
+                    assets.animation`myAnim3`,
                     50,
                     true
                     )
                     if (info.countdown() > 6) {
                         wingg = 0
                     }
-                    info.changeCountdownBy(info.countdown())
+                    info.changeCountdownBy(0 - info.countdown())
                 }
                 acheck = 1
             }
@@ -292,17 +156,18 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
     if (wingg == 0) {
         life += -1
         if (life < 2) {
-            lives.setImage()
+            lives.setImage(assets.image`myImage2`)
         } else if (life < 3) {
-            lives.setImage()
+            lives.setImage(assets.image`myImage4`)
         } else {
-            lives.setImage()
+            lives.setImage(assets.image`myImage5`)
         }
         pause(500)
     } else {
         sprites.destroy(otherSprite, effects.disintegrate, 200)
     }
 })
+let Enemy2: Sprite = null
 let mySprite2: Sprite = null
 let mySprite: Sprite = null
 let Rocket: Sprite = null
@@ -318,27 +183,10 @@ game.setGameOverMessage(true, "Saving High Score")
 life = 3
 start = 0
 acheck = 0
-let background = sprites.create(, SpriteKind.bground)
+let background = sprites.create(assets.image`myImage`, SpriteKind.bground)
 animation.runImageAnimation(
 background,
-[img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `],
+assets.animation`myAnim4`,
 100,
 false
 )
@@ -350,7 +198,7 @@ for (let index = 0; index < 1100; index++) {
     }
 }
 animation.stopAnimation(animation.AnimationTypes.All, background)
-background.setImage()
+background.setImage(assets.image`myImage1`)
 pauseUntil(() => controller.A.isPressed())
 color.FadeToWhite.startScreenEffect(500)
 pause(600)
@@ -358,32 +206,15 @@ color.startFadeFromCurrent(color.originalPalette, 500)
 start = 1
 animation.runImageAnimation(
 background,
-[img`
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    . . . . . . . . . . . . . . . . 
-    `],
+assets.animation`myAnim2`,
 25,
 true
 )
-Droney = sprites.create(, SpriteKind.Player)
-blaster = sprites.create(, SpriteKind.Accesory)
+Droney = sprites.create(assets.image`Droney`, SpriteKind.Player)
+blaster = sprites.create(assets.image`Blaster`, SpriteKind.Accesory)
 Droney.setStayInScreen(true)
 blaster.setStayInScreen(true)
-lives = sprites.create(, SpriteKind.bground)
+lives = sprites.create(assets.image`myImage5`, SpriteKind.bground)
 lives.setPosition(24, 8)
 controller.configureRepeatEventDefaults(500, 30)
 controller.moveSprite(Droney)
@@ -391,7 +222,7 @@ controller.moveSprite(blaster)
 info.setScore(0)
 forever(function () {
     if (!(life <= 0)) {
-        mySprite = sprites.create(, SpriteKind.Enemy)
+        mySprite = sprites.create(assets.image`Enemy1`, SpriteKind.Enemy)
         mySprite.setPosition(160, randint(0, 120))
         mySprite.setVelocity(50, randint(-50, 50))
         mySprite.setBounceOnWall(true)
@@ -408,12 +239,20 @@ forever(function () {
         sprites.destroyAllSpritesOfKind(SpriteKind.Projectile, effects.spray, 500)
         sprites.destroyAllSpritesOfKind(SpriteKind.Accesory, effects.spray, 500)
         sprites.destroyAllSpritesOfKind(SpriteKind.bground, effects.spray, 500)
-        scene.setBackgroundImage()
+        scene.setBackgroundImage(assets.image`bg`)
         pause(500)
         story.printText(convertToText(Math.max(info.highScore(), info.score())), 80, 60)
         pause(500)
-        mySprite2 = sprites.create(, SpriteKind.bground1)
+        mySprite2 = sprites.create(assets.image`myImage16`, SpriteKind.bground1)
         life += -1
     }
     game.setGameOverScoringType(game.ScoringType.HighScore)
+})
+forever(function () {
+    if (start == 1) {
+        pause(5000)
+        Enemy2 = sprites.create(assets.image`myImage17`, SpriteKind.Enemy)
+        Enemy2.setPosition(160, randint(0, 120))
+        Enemy2.setVelocity(-200, 0)
+    }
 })
