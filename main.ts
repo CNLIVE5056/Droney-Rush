@@ -140,7 +140,7 @@ controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
                     if (info.countdown() > 6) {
                         wingg = 0
                     }
-                    info.changeCountdownBy(info.countdown())
+                    info.changeCountdownBy(0 - info.countdown())
                 }
                 acheck = 1
             }
