@@ -2,7 +2,26 @@ namespace SpriteKind {
     export const Accesory = SpriteKind.create()
     export const bground = SpriteKind.create()
     export const bground1 = SpriteKind.create()
+    export const Lv2Enemy = SpriteKind.create()
+    export const Lv3Enemy = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Lv2Enemy, function (sprite, otherSprite) {
+    if (wingg == 0) {
+        life += -2
+        life = Math.abs(life)
+        if (life < 2) {
+            lives.setImage(assets.image`myImage2`)
+        } else if (life < 3) {
+            lives.setImage(assets.image`myImage4`)
+        } else {
+            lives.setImage(assets.image`myImage5`)
+        }
+        pause(500)
+    } else {
+        info.changeScoreBy(1)
+        sprites.destroy(otherSprite, effects.disintegrate, 200)
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(life <= 0)) {
         if (start == 1) {
@@ -22,7 +41,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     }
                 }
             } else if (sprite == 2) {
-                if (wingg == 0) {
+                if (life > 1 && wingg == 0) {
                     blaster.setImage(assets.image`Wing0`)
                     wingg = 1
                     animation.runImageAnimation(
@@ -76,6 +95,11 @@ info.onCountdownEnd(function () {
     )
     wingg = 0
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Lv2Enemy, function (sprite, otherSprite) {
+    sprites.destroy(sprite, effects.disintegrate, 500)
+    sprites.destroy(otherSprite, effects.disintegrate, 500)
+    info.changeScoreBy(2)
+})
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     acheck = 0
 })
@@ -83,8 +107,20 @@ controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
     if (!(life <= 0)) {
         if (start == 1) {
             if (acheck == 0) {
-                if (wingg == 0) {
+                if (info.countdown() > 9 || wingg == 0) {
                     sprite = (sprite + 1) % 4
+                    if (info.countdown() > 9) {
+                        info.stopCountdown()
+                        wingg = 0
+                        life += 1
+                        if (life < 2) {
+                            lives.setImage(assets.image`myImage2`)
+                        } else if (life < 3) {
+                            lives.setImage(assets.image`myImage4`)
+                        } else {
+                            lives.setImage(assets.image`myImage5`)
+                        }
+                    }
                     if (sprite == 0) {
                         animation.stopAnimation(animation.AnimationTypes.All, blaster)
                         Droney.setImage(assets.image`Droney`)
@@ -130,14 +166,10 @@ controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
         }
     }
 })
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(sprite, effects.disintegrate, 500)
-    sprites.destroy(otherSprite, effects.disintegrate, 500)
-    info.changeScoreBy(1)
-})
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Lv3Enemy, function (sprite, otherSprite) {
     if (wingg == 0) {
-        life += -1
+        life += -3
+        life = Math.abs(life)
         if (life < 2) {
             lives.setImage(assets.image`myImage2`)
         } else if (life < 3) {
@@ -151,7 +183,36 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSp
         sprites.destroy(otherSprite, effects.disintegrate, 200)
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Lv3Enemy, function (sprite, otherSprite) {
+    sprites.destroy(sprite, effects.disintegrate, 500)
+    sprites.destroy(otherSprite, effects.disintegrate, 500)
+    info.changeScoreBy(3)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprites.destroy(sprite, effects.disintegrate, 500)
+    sprites.destroy(otherSprite, effects.disintegrate, 500)
+    info.changeScoreBy(1)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    if (wingg == 0) {
+        life += -1
+        life = Math.abs(life)
+        if (life < 2) {
+            lives.setImage(assets.image`myImage2`)
+        } else if (life < 3) {
+            lives.setImage(assets.image`myImage4`)
+        } else {
+            lives.setImage(assets.image`myImage5`)
+        }
+        pause(500)
+    } else {
+        info.changeScoreBy(1)
+        sprites.destroy(otherSprite, effects.disintegrate, 200)
+    }
+})
+let enemy2: Sprite = null
 let mySprite2: Sprite = null
+let mouse: Sprite = null
 let mySprite: Sprite = null
 let Rocket: Sprite = null
 let sprite = 0
@@ -203,6 +264,10 @@ controller.configureRepeatEventDefaults(500, 30)
 controller.moveSprite(Droney)
 controller.moveSprite(blaster)
 info.setScore(0)
+let mySprite3 = sprites.create(assets.image`myImage19`, SpriteKind.bground)
+mySprite3.setPosition(128, 110)
+let mySprite4 = sprites.create(assets.image`myImage20`, SpriteKind.bground)
+mySprite4.setPosition(32, 110)
 forever(function () {
     if (!(life <= 0)) {
         mySprite = sprites.create(assets.image`Enemy1`, SpriteKind.Enemy)
@@ -212,6 +277,15 @@ forever(function () {
         mySprite.setFlag(SpriteFlag.AutoDestroy, true)
         pause(1500)
         mySprite.setBounceOnWall(false)
+    }
+})
+forever(function () {
+    if (!(life <= 0)) {
+        pause(2000)
+        mouse = sprites.create(assets.image`myImage17`, SpriteKind.Lv2Enemy)
+        mouse.setPosition(160, randint(0, 120))
+        mouse.setVelocity(-200, 0)
+        mouse.setFlag(SpriteFlag.AutoDestroy, true)
     }
 })
 forever(function () {
@@ -225,9 +299,22 @@ forever(function () {
         scene.setBackgroundImage(assets.image`bg`)
         pause(500)
         story.printText(convertToText(Math.max(info.highScore(), info.score())), 80, 60)
-        pause(500)
+        pause(1000)
         mySprite2 = sprites.create(assets.image`myImage16`, SpriteKind.bground1)
+        mySprite2.setPosition(80, 80)
         life += -1
+        story.printText(convertToText(Math.max(info.highScore(), info.score())), 80, 60)
+        story.printText(convertToText(Math.max(info.highScore(), info.score())), 80, 60)
+        story.printText(convertToText(Math.max(info.highScore(), info.score())), 80, 60)
     }
     game.setGameOverScoringType(game.ScoringType.HighScore)
+})
+forever(function () {
+    if (!(life <= 0)) {
+        pause(5000)
+        enemy2 = sprites.create(assets.image`myImage18`, SpriteKind.Lv3Enemy)
+        enemy2.setPosition(160, 100)
+        enemy2.setVelocity(-100, 0)
+        enemy2.setFlag(SpriteFlag.AutoDestroy, true)
+    }
 })
