@@ -1072,7 +1072,7 @@ forever(function () {
         music.setTempo(500)
         music.setVolume(255)
         music.play(music.createSong(assets.song`title`), music.PlaybackMode.InBackground)
-        music.setVolume(200)
+        music.setVolume(100)
         music.play(music.createSong(assets.song`The Drone beat`), music.PlaybackMode.UntilDone)
     }
 })
