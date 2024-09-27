@@ -941,6 +941,8 @@ for (let index = 0; index < 900; index++) {
         break;
     }
 }
+music.stopAllSounds()
+music.setVolume(255)
 life = 3
 color.FadeToWhite.startScreenEffect(500)
 pause(550)
@@ -1068,6 +1070,9 @@ forever(function () {
     if(start == 1) {
         music.stopAllSounds()
         music.setTempo(500)
+        music.setVolume(255)
+        music.play(music.createSong(assets.song`title`), music.PlaybackMode.InBackground)
+        music.setVolume(200)
         music.play(music.createSong(assets.song`The Drone beat`), music.PlaybackMode.UntilDone)
     }
 })
