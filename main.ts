@@ -150,7 +150,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             } else if (sprite0 == 1) {
                 if (life <= 2.8) {
                     story.spriteSayText(Droney, "Healing...Life:" + convertToText(Math.round((life + 0.2) * 10) / 10))
-                    life += 0.2
+                    life += 0.5
                     life = Math.round(life * 10) / 10
                     if (life < 2) {
                         lives.setImage(assets.image`myImage2`)
@@ -181,7 +181,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     info.startCountdown(10)
                 }
             } else {
-                if (randint(1, 3) == 1) {
+                if (randint(1, 6) == 1) {
                     if (sierpinski==0) {
                         for (let index = 0; index < 3; index++) {
                             Rocket = sprites.createProjectileFromSprite(SelectSprite(7), blaster, randint(0, 33), randint(-33, 33))
@@ -260,12 +260,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     CNumAnims[1] = assets.animation`Saws_a`
                 }
                 if (choose2 == 3) {
-                    CNumAnims[1] = assets.animation`Saws1`
+                    CNumAnims[1] = assets.animation`Saws0`
                 }
             }
             if (choose1 == 7) {
                 if (choose2 == 0) {
                     CNumAnims[2] = assets.animation`Sawa1`
+                    sierpinski = 0
                 }
                 if (choose2 == 1) {
                     CNumAnims[2] = assets.animation`Sawa0`
@@ -273,9 +274,11 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 }
                 if (choose2 == 2) {
                     CNumAnims[2] = assets.animation`Sawa`
+                    sierpinski = 0
                 }
                 if (choose2 == 3) {
                     CNumAnims[2] = assets.animation`Sawa2`
+                    sierpinski = 0
                 }
             }
         }
