@@ -181,29 +181,25 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                     info.startCountdown(10)
                 }
             } else {
-                if (randint(1, 6) == 1) {
-                    if (sierpinski==0) {
-                        for (let index = 0; index < 3; index++) {
-                            Rocket = sprites.createProjectileFromSprite(SelectSprite(7), blaster, randint(0, 33), randint(-33, 33))
-                            animation.runImageAnimation(
-                                Rocket,
-                                Animset(2),
-                                50,
-                                true
-                            )
-                            mySprite.setFlag(SpriteFlag.AutoDestroy, true)
-                        }
-                    }else{
-                        for (let index = 0; index < 1; index++) {
-                            Rocket = sprites.createProjectileFromSprite(SelectSprite(7), blaster, randint(0, 33), randint(-33, 33))
-                            animation.runImageAnimation(
-                                Rocket,
-                                Animset(2),
-                                50,
-                                true
-                            )
-                            mySprite.setFlag(SpriteFlag.AutoDestroy, true)
-                        }
+                if (sierpinski==0) {
+                    Rocket = sprites.createProjectileFromSprite(SelectSprite(7), blaster, 200, randint(-100, 100))
+                    animation.runImageAnimation(
+                        Rocket,
+                        Animset(2),
+                        50,
+                        true
+                    )
+                        mySprite.setFlag(SpriteFlag.AutoDestroy, true)
+                }else{
+                    if (Math.percentChance(33)) {
+                        Rocket = sprites.createProjectileFromSprite(SelectSprite(7), blaster, 200, randint(-100, 100))
+                        animation.runImageAnimation(
+                            Rocket,
+                            Animset(2),
+                            50,
+                            true
+                        )
+                        mySprite.setFlag(SpriteFlag.AutoDestroy, true)
                     }
                 }
             }
@@ -1055,11 +1051,12 @@ forever(function () {
         if (!(life <= 0)) {
             mySprite = sprites.create(assets.image`Enemy1`, SpriteKind.Enemy)
             mySprite.setPosition(160, randint(0, 120))
-            mySprite.setVelocity(50, randint(-50, 50))
+            mySprite.setVelocity(100, randint(-50, 50))
             mySprite.setBounceOnWall(true)
             mySprite.setFlag(SpriteFlag.AutoDestroy, true)
-            pause(1500)
+            pause(1000)
             mySprite.setBounceOnWall(false)
+            pause(500)
         }
     }
 })
@@ -1072,7 +1069,6 @@ forever(function () {
 forever(function () {
     if(start == 1) {
         music.stopAllSounds()
-        music.setTempo(500)
         music.setVolume(255)
         music.play(music.createSong(assets.song`title`), music.PlaybackMode.InBackground)
         music.setVolume(100)
