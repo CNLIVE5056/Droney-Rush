@@ -928,6 +928,7 @@ life = 0
 start = 0
 acheck = 0
 bcheck = 0
+music.stopAllSounds()
 background = sprites.create(assets.image`myImage`, SpriteKind.bground)
 animation.runImageAnimation(
 background,
