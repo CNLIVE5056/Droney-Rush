@@ -149,9 +149,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
                 Rocket = sprites.createProjectileFromSprite(SelectSprite(1), blaster, 100, 0)
             } else if (sprite0 == 1) {
                 if (life <= 2.8) {
-                    story.spriteSayText(Droney, "Healing...Life:" + convertToText(Math.round((life + 0.5) * 10) / 10))
-                    life += 0.5
-                    life = Math.round(life * 10) / 10
+                    story.spriteSayText(Droney, "Healing")
+                    life += 1
+                    life = Math.round(life)
                     if (life < 2) {
                         lives.setImage(assets.image`myImage2`)
                     } else if (life < 3) {
