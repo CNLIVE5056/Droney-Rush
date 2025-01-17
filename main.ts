@@ -693,6 +693,9 @@ controller.B.onEvent(ControllerButtonEvent.Released, function () {
             sp6.setImage(assets.image`myImage23`)
         }
     }
+    if (start == 1) {
+        game.reset()
+    }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Lv3Enemy, function (sprite, otherSprite) {
     sprites.destroy(sprite, effects.disintegrate, 500)
@@ -1016,22 +1019,9 @@ forever(function () {
             mySprite7.setPosition(blaster.x, blaster.y)
         }
         if (life == 0) {
-            sprites.destroyAllSpritesOfKind(SpriteKind.Player, effects.spray, 500)
-            sprites.destroyAllSpritesOfKind(SpriteKind.Enemy, effects.spray, 500)
-            sprites.destroyAllSpritesOfKind(SpriteKind.Projectile, effects.spray, 500)
-            sprites.destroyAllSpritesOfKind(SpriteKind.Accesory, effects.spray, 500)
-            sprites.destroyAllSpritesOfKind(SpriteKind.bground, effects.spray, 500)
-            scene.setBackgroundImage(assets.image`bg`)
-            pause(500)
-            story.printText(convertToText(Math.max(info.highScore(), info.score())), 80, 60)
-            pause(1000)
-            mySprite2 = sprites.create(assets.image`myImage16`, SpriteKind.bground1)
-            mySprite2.setPosition(80, 80)
-            life += -1
-        } else if (life == -1) {
-            story.printText(convertToText(Math.max(info.highScore(), info.score())), 80, 60)
-        } else {
             game.setGameOverScoringType(game.ScoringType.HighScore)
+            game.setGameOverEffect(true, effects.dissolve)
+            game.gameOver(true)
         }
     }
 })
